@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday mama!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap');
+        
+        :root {
+            --primary: #ff85a2;
+            --secondary: #ffd6e0;
+            --accent: #ff4785;
+            --text: #5a3d5c;
+            --light: #fff9fb;
+            --shadow: 0 10px 30px rgba(255, 71, 133, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+            animation: fadeOut 1.5s ease-in-out 2.5s forwards;
+        }
+        
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+        
+        .splash-text {
+            font-size: 3.5rem;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        
+        .splash-subtitle {
+            font-size: 1.2rem;
+            color: white;
+            opacity: 0.8;
+            margin-top: 10px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            animation: fadeIn 1s ease-in-out 1.5s both;
+        }
+        
+        .splash-text::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            animation: typewriter 1.8s steps(12) 0.5s forwards;
+        }
+        
+        @keyframes typewriter {
+            to { left: 100%; }
+        }
+        
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            opacity: 0;
+            animation: float-up 4s ease-in forwards;
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.7);
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            max-width: 100%;
+            padding: 20px;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-in-out 2.8s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: subtleBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes subtleBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .menu-item {
+            background: white;
+            border-radius: 25px;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            height: 170px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,214,224,0.3), rgba(255,133,162,0.2));
+            z-index: -1;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(255, 71, 133, 0.3);
+        }
+        
+        .menu-item i {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+            transition: transform 0.3s;
+        }
+        
+        .menu-item:hover i {
+            transform: scale(1.1);
+        }
+        
+        .menu-item h2 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .menu-item p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        .menu-item .shine {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 100%);
+            transform: skewX(-25deg);
+            transition: all 0.6s;
+        }
+        
+        .menu-item:hover .shine {
+            left: 150%;
+        }
+        
+        .section {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            z-index: 100;
+            padding: 20px;
+            overflow-y: auto;
+            display: none;
+            transform: translateY(10px);
+            opacity: 0;
+            transition: transform 0.1s, opacity 0.1s;
+        }
+        
+        .section.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            padding: 5px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .back-btn:hover {
+            transform: translateX(-5px);
+            background: rgba(255, 71, 133, 0.1);
+        }
+        
+        /* Todo List Styles */
+        .todo-container {
+            max-width: 500px;
+            margin: 0 auto;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .todo-input {
+            display: flex;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .todo-input input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: var(--light);
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .todo-input button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: background 0.3s;
+        }
+        
+        .todo-input button:hover {
+            background: #ff2d6d;
+        }
+        
+        .todo-list {
+            list-style: none;
+        }
+        
+        .todo-item {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            animation: fadeIn 0.5s ease-out;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+            transition: all 0.3s;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        
+        .todo-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .todo-item.completed {
+            opacity: 0.6;
+            background: rgba(255,214,224,0.3);
+        }
+        
+        .todo-item.completed .todo-text {
+            text-decoration: line-through;
+        }
+        
+        .todo-checkbox {
+            margin-right: 15px;
+            width: 22px;
+            height: 22px;
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+        
+        .todo-text {
+            flex: 1;
+            font-size: 1rem;
+        }
+        
+        .todo-delete {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: all 0.3s;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .todo-delete:hover {
+            opacity: 1;
+            background: rgba(255, 71, 133, 0.1);
+        }
+        
+        /* Calculator Styles */
+        .calculator {
+            max-width: 320px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            animation: fadeInUp 0.5s ease-out;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .calculator-display {
+            background: var(--text);
+            color: white;
+            padding: 25px 20px;
+            text-align: right;
+            font-size: 2.2rem;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        .calculator-history {
+            font-size: 1rem;
+            opacity: 0.7;
+            height: 20px;
+            margin-bottom: 5px;
+        }
+        
+        .calculator-current {
+            margin-top: 5px;
+            word-break: break-all;
+        }
+        
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: #eee;
+        }
+        
+        .calculator-btn {
+            background: white;
+            border: none;
+            padding: 20px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+        
+        .calculator-btn:active {
+            background: #f9f9f9;
+            transform: scale(0.95);
+        }
+        
+        .calculator-btn.operator {
+            background: var(--secondary);
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .calculator-btn.equals {
+            background: var(--accent);
+            color: white;
+            grid-column: span 2;
+            font-weight: 600;
+        }
+        
+        /* Mini AI Styles */
+        .ai-container {
+            max-width: 500px;
+            margin: 0 auto;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        .ai-messages {
+            height: 65vh;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding-right: 10px;
+        }
+        
+        .ai-message {
+            margin-bottom: 15px;
+            max-width: 85%;
+            padding: 15px;
+            border-radius: 18px;
+            animation: fadeIn 0.4s ease-out;
+            line-height: 1.4;
+            position: relative;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+        }
+        
+        .ai-message.user {
+            background: var(--secondary);
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .ai-message.bot {
+            background: var(--primary);
+            color: white;
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .ai-message.bot::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+            transform: rotate(-20deg);
+        }
+        
+        .ai-message.user::after {
+            content: '';
+            position: absolute;
+            right: -10px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            transform: rotate(20deg);
+        }
+        
+        .ai-input {
+            display: flex;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 30px;
+            overflow: hidden;
+        }
+        
+        .ai-input input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            background: var(--light);
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .ai-input button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: background 0.3s;
+        }
+        
+        .ai-input button:hover {
+            background: #ff2d6d;
+        }
+        
+        /* Animated Things Styles */
+        .animation-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 70vh;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        .animation-box {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 30px;
+            margin-bottom: 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .animation-box:hover {
+            transform: scale(1.05);
+        }
+        
+        .animation-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .animation-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 71, 133, 0.2);
+        }
+        
+        .animation-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 71, 133, 0.3);
+        }
+        
+        /* Hidden Notes */
+        .secret-note {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 10;
+            transition: all 0.3s;
+        }
+        
+        .secret-note:hover {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .note-paper {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 220px;
+            background: #fff9e6;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: rotate(2deg);
+            display: none;
+            z-index: 10;
+            animation: foldIn 0.5s ease-out;
+            border: 1px solid #ffe6cc;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        
+        .note-paper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255,230,204,0.3) 0%, rgba(255,230,204,0) 10%);
+        }
+        
+        @keyframes foldIn {
+            from { transform: scale(0) rotate(10deg); opacity: 0; }
+            to { transform: scale(1) rotate(2deg); opacity: 1; }
+        }
+        
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            opacity: 0;
+            z-index: 1000;
+            animation: confetti-fall 5s linear forwards;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Bubble Animation */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            animation: float-bubble 15s infinite ease-in;
+            z-index: -1;
+        }
+        
+        @keyframes float-bubble {
+            0% {
+                transform: translateY(0) translateX(0) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-item {
+                height: 140px;
+            }
+            
+            .splash-text {
+                font-size: 3rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div class="splash-screen">
+        <div class="floating-hearts" id="hearts-container"></div>
+        <div class="splash-text">Happy Birthday mama!</div>
+        <div class="splash-subtitle">Gift 1 of 2</div>
+    </div>
+    
+    <!-- Main Menu -->
+    <div class="container">
+        <header>
+            <h1>Gai sey's Collection</h1>
+            <p class="subtitle">A special birthday experience</p>
+        </header>
+        
+        <div class="menu-grid">
+            <div class="menu-item" onclick="openSection('todo')">
+                <div class="shine"></div>
+                <i class="fas fa-check-circle"></i>
+                <h2>To-Do List</h2>
+                <p>Organize your special day</p>
+            </div>
+            
+            <div class="menu-item" onclick="openSection('calculator')">
+                <div class="shine"></div>
+                <i class="fas fa-calculator"></i>
+                <h2>Dreamy Calculator</h2>
+                <p>Beautiful & functional</p>
+            </div>
+            
+            <div class="menu-item" onclick="openSection('ai')">
+                <div class="shine"></div>
+                <i class="fas fa-robot"></i>
+                <h2>Mini AI Friend</h2>
+                <p>Chat with your digital pal</p>
+            </div>
+            
+            <div class="menu-item" onclick="openSection('animations')">
+                <div class="shine"></div>
+                <i class="fas fa-magic"></i>
+                <h2>Animated Surprises</h2>
+                <p>Playful interactions</p>
+            </div>
+            
+            <div class="menu-item" onclick="showConfetti()">
+                <div class="shine"></div>
+                <i class="fas fa-birthday-cake"></i>
+                <h2>Birthday Surprise</h2>
+                <p>Click for celebration!</p>
+            </div>
+            
+            <div class="menu-item" onclick="openSection('secret')">
+                <div class="shine"></div>
+                <i class="fas fa-gift"></i>
+                <h2>Secret Gift</h2>
+                <p>Just for you</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Todo List Section -->
+    <div class="section" id="todo-section">
+        <button class="back-btn" onclick="closeSection('todo')"><i class="fas fa-arrow-left"></i></button>
+        <div class="todo-container">
+            <h2>Gai's Birthday To-Do List</h2>
+            <p>Plan your perfect day</p>
+            
+            <div class="todo-input">
+                <input type="text" id="todo-input" placeholder="Add a new task...">
+                <button onclick="addTodo()"><i class="fas fa-plus"></i></button>
+            </div>
+            
+            <ul class="todo-list" id="todo-list">
+                <!-- Todos will be added here -->
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Calculator Section -->
+    <div class="section" id="calculator-section">
+        <button class="back-btn" onclick="closeSection('calculator')"><i class="fas fa-arrow-left"></i></button>
+        <h2>Dreamy Calculator</h2>
+        <p>A beautiful calculator for your special day</p>
+        
+        <div class="calculator">
+            <div class="calculator-display">
+                <div class="calculator-history" id="calc-history"></div>
+                <div class="calculator-current" id="calc-current">0</div>
+            </div>
+            <div class="calculator-buttons">
+                <button class="calculator-btn" onclick="clearCalculator()">C</button>
+                <button class="calculator-btn" onclick="calculatorInput('±')">±</button>
+                <button class="calculator-btn" onclick="calculatorInput('%')">%</button>
+                <button class="calculator-btn operator" onclick="calculatorInput('/')">÷</button>
+                
+                <button class="calculator-btn" onclick="calculatorInput('7')">7</button>
+                <button class="calculator-btn" onclick="calculatorInput('8')">8</button>
+                <button class="calculator-btn" onclick="calculatorInput('9')">9</button>
+                <button class="calculator-btn operator" onclick="calculatorInput('*')">×</button>
+                
+                <button class="calculator-btn" onclick="calculatorInput('4')">4</button>
+                <button class="calculator-btn" onclick="calculatorInput('5')">5</button>
+                <button class="calculator-btn" onclick="calculatorInput('6')">6</button>
+                <button class="calculator-btn operator" onclick="calculatorInput('-')">-</button>
+                
+                <button class="calculator-btn" onclick="calculatorInput('1')">1</button>
+                <button class="calculator-btn" onclick="calculatorInput('2')">2</button>
+                <button class="calculator-btn" onclick="calculatorInput('3')">3</button>
+                <button class="calculator-btn operator" onclick="calculatorInput('+')">+</button>
+                
+                <button class="calculator-btn" onclick="calculatorInput('0')">0</button>
+                <button class="calculator-btn" onclick="calculatorInput('.')">.</button>
+                <button class="calculator-btn equals" onclick="calculateResult()">=</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mini AI Section -->
+    <div class="section" id="ai-section">
+        <button class="back-btn" onclick="closeSection('ai')"><i class="fas fa-arrow-left"></i></button>
+        <h2>Mini AI Friend</h2>
+        <p>Chat with your digital birthday companion</p>
+        
+        <div class="ai-container">
+            <div class="ai-messages" id="ai-messages">
+                <div class="ai-message bot">
+                    Happy Birthday Gai! 🎉 I'm your special birthday AI. How can I make your day even better?
+                </div>
+            </div>
+            
+            <div class="ai-input">
+                <input type="text" id="ai-input" placeholder="Type your message..." onkeypress="if(event.key == 'Enter') sendAiMessage()">
+                <button onclick="sendAiMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Animations Section -->
+    <div class="section" id="animations-section">
+        <button class="back-btn" onclick="closeSection('animations')"><i class="fas fa-arrow-left"></i></button>
+        <h2>Animated Surprises</h2>
+        <p>Interactive elements to play with</p>
+        
+        <div class="animation-container">
+            <div class="animation-box" id="animation-box" onclick="changeAnimation()">
+                Tap Me!
+            </div>
+            
+            <div class="animation-controls">
+                <button class="animation-btn" onclick="startAnimation('bounce')">Bounce</button>
+                <button class="animation-btn" onclick="startAnimation('spin')">Spin</button>
+                <button class="animation-btn" onclick="startAnimation('pulse')">Pulse</button>
+                <button class="animation-btn" onclick="startAnimation('shake')">Shake</button>
+                <button class="animation-btn" onclick="startAnimation('flip')">Flip</button>
+                <button class="animation-btn" onclick="startAnimation('jello')">Jello</button>
+            </div>
+            
+            <div style="margin-top: 30px; text-align: center;">
+                <button class="animation-btn" onclick="createBubbles()">
+                    <i class="fas fa-bubbles"></i> Bubble Surprise
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Secret Gift Section -->
+    <div class="section" id="secret-section">
+        <button class="back-btn" onclick="closeSection('secret')"><i class="fas fa-arrow-left"></i></button>
+        <div style="text-align: center; margin-top: 50px;">
+            <i class="fas fa-gift" style="font-size: 4rem; color: var(--accent); margin-bottom: 20px; animation: bounce 2s infinite;"></i>
+            <h2>For Gai's Eyes Only</h2>
+            <p style="max-width: 300px; margin: 0 auto 30px;">
+                This is a special message just for you. Remember that you're amazing and loved!
+            </p>
+            <button class="animation-btn" onclick="showSpecialMessage()">
+                Reveal Special Message
+            </button>
+            <div id="special-message" style="margin-top: 30px; display: none;">
+                <p style="font-size: 1.2rem; background: var(--secondary); padding: 15px; border-radius: 10px;">
+                    On your special day, I hope you know how wonderful you are. May this year bring you joy, and laughter. Second gift arrives on the 23rd of may! ❤️
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Hidden Note -->
+    <div class="secret-note" onclick="toggleNote()">?</div>
+    <div class="note-paper" id="secret-note">
+        <p>Dear Gai,</p>
+        <p>I hope you're having the most wonderful birthday! You deserve all the happiness in the world.</p>
+        <p>With love,</p>
+        <p>Your Secret Admirer</p>
+    </div>
+    
+    <script>
+        // Open section function
+        function openSection(section) {
+            document.getElementById(section + '-section').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById(section + '-section').classList.add('active');
+            }, 10);
+            document.querySelector('.container').style.display = 'none';
+        }
+        
+        // Close section function - INSTANT response
+        function closeSection(section) {
+            document.getElementById(section + '-section').style.display = 'none';
+            document.querySelector('.container').style.display = 'block';
+            document.getElementById(section + '-section').classList.remove('active');
+        }
+        
+        // Create floating hearts
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const heartCount = 15;
+            
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(heart);
+                
+                // Remove heart after animation
+                setTimeout(() => {
+                    heart.remove();
+                }, 4000);
+            }
+            
+            setTimeout(createHearts, 300);
+        }
+        
+        // Todo List functionality
+        let todos = [];
+        
+        function addTodo() {
+            const input = document.getElementById('todo-input');
+            const text = input.value.trim();
+            
+            if (text) {
+                todos.push({ text, completed: false });
+                input.value = '';
+                renderTodos();
+            }
+        }
+        
+        function renderTodos() {
+            const list = document.getElementById('todo-list');
+            list.innerHTML = '';
+            
+            todos.forEach((todo, index) => {
+                const li = document.createElement('li');
+                li.className = 'todo-item' + (todo.completed ? ' completed' : '');
+                
+                li.innerHTML = `
+                    <input type="checkbox" class="todo-checkbox" ${todo.completed ? 'checked' : ''} 
+                        onchange="toggleTodo(${index})">
+                    <span class="todo-text">${todo.text}</span>
+                    <button class="todo-delete" onclick="deleteTodo(${index})"><i class="fas fa-times"></i></button>
+                `;
+                
+                list.appendChild(li);
+            });
+        }
+        
+        function toggleTodo(index) {
+            todos[index].completed = !todos[index].completed;
+            renderTodos();
+        }
+        
+        function deleteTodo(index) {
+            todos.splice(index, 1);
+            renderTodos();
+        }
+        
+        // Calculator functionality
+        let currentInput = '0';
+        let previousInput = '';
+        let operation = null;
+        let resetInput = false;
+        
+        function calculatorInput(value) {
+            if (value === '±') {
+                currentInput = (parseFloat(currentInput) * -1).toString();
+                updateCalculatorDisplay();
+                return;
+            }
+            
+            if (value === '%') {
+                currentInput = (parseFloat(currentInput) / 100).toString();
+                updateCalculatorDisplay();
+                return;
+            }
+            
+            if (resetInput) {
+                currentInput = '0';
+                resetInput = false;
+            }
+            
+            if (value === '.') {
+                if (!currentInput.includes('.')) {
+                    currentInput += '.';
+                }
+            } else if (currentInput === '0') {
+                currentInput = value;
+            } else {
+                currentInput += value;
+            }
+            
+            updateCalculatorDisplay();
+        }
+        
+        function clearCalculator() {
+            currentInput = '0';
+            previousInput = '';
+            operation = null;
+            updateCalculatorDisplay();
+        }
+        
+        function setOperation(op) {
+            if (currentInput === '0' && previousInput && operation) {
+                operation = op;
+                return;
+            }
+            
+            if (operation !== null) calculateResult();
+            
+            previousInput = currentInput;
+            operation = op;
+            resetInput = true;
+            
+            document.getElementById('calc-history').textContent = `${previousInput} ${operation}`;
+        }
+        
+        function calculateResult() {
+            if (operation === null) return;
+            
+            let result;
+            const prev = parseFloat(previousInput);
+            const current = parseFloat(currentInput);
+            
+            switch (operation) {
+                case '+': result = prev + current; break;
+                case '-': result = prev - current; break;
+                case '*': result = prev * current; break;
+                case '/': result = prev / current; break;
+                default: return;
+            }
+            
+            currentInput = result.toString();
+            operation = null;
+            previousInput = '';
+            resetInput = true;
+            updateCalculatorDisplay();
+        }
+        
+        function updateCalculatorDisplay() {
+            document.getElementById('calc-current').textContent = currentInput;
+        }
+        
+        // Setup calculator buttons
+        document.querySelectorAll('.calculator-btn').forEach(button => {
+            const value = button.textContent;
+            if (!['C', '±', '%', '='].includes(value)) {
+                button.addEventListener('click', () => {
+                    if (['+', '-', '×', '÷'].includes(value)) {
+                        const op = value === '×' ? '*' : value === '÷' ? '/' : value;
+                        setOperation(op);
+                    } else {
+                        calculatorInput(value);
+                    }
+                });
+            }
+        });
+        
+        // Mini AI functionality - Advanced responses
+        const aiResponses = {
+            greetings: [
+                "Happy Birthday Gai! 🎉 What would make your day extra special?",
+                "Hello beautiful! On your birthday, you deserve the world. What's on your mind?",
+                "Gai! 🥳 Your special day is here! How can I help make it unforgettable?"
+            ],
+            feelings: {
+                happy: [
+                    "I'm so glad you're happy! What's bringing you joy today?",
+                    "Your happiness is contagious! Tell me more about what's making you smile!",
+                    "That's wonderful! Happiness looks good on you. What else would make your day perfect?"
+                ],
+                sad: [
+                    "Even on your birthday, it's okay to feel down. Would you like to talk about it?",
+                    "I'm here for you, Gai. What would help lift your spirits today?",
+                    "Birthdays can bring mixed feelings. Remember you're loved and valued today and every day."
+                ],
+                excited: [
+                    "That excitement is infectious! What are you most looking forward to?",
+                    "Yay! Tell me all about what's got you so excited!",
+                    "Your enthusiasm is making me excited too! What's the highlight of your day so far?"
+                ]
+            },
+            activities: {
+                party: [
+                    "A party sounds perfect! Who are you celebrating with?",
+                    "Parties are the best! What's your ideal birthday party look like?",
+                    "Dance the night away! What's your favorite party song?"
+                ],
+                relax: [
+                    "Sometimes the best birthdays are the quiet ones. How are you relaxing?",
+                    "Self-care is the perfect gift. Are you reading, bathing, or just enjoying the peace?",
+                    "You deserve this relaxation time. What's your favorite way to unwind?"
+                ],
+                travel: [
+                    "Ooh where are you going or dreaming of going?",
+                    "Travel makes birthdays extra special! Tell me about your destination!",
+                    "Adventure awaits! What's on your travel itinerary?"
+                ]
+            },
+            compliments: [
+                "You're glowing today! Birthday looks good on you!",
+                "The world is brighter with you in it, Gai!",
+                "You're not just a year older, you're a year more amazing!",
+                "Your smile could light up the darkest room!",
+                "You have this incredible way of making everyone around you feel special!"
+            ],
+            questions: [
+                "What's your favorite birthday memory?",
+                "If you could have any birthday wish come true, what would it be?",
+                "What's making you smile today?",
+                "What's the best birthday gift you've ever received?",
+                "How do you want to feel when you look back on this birthday?"
+            ],
+            default: [
+                "Tell me more about that!",
+                "I'd love to hear more about how you're celebrating!",
+                "What else is on your mind today?",
+                "How can I make your birthday even better?",
+                "You're so interesting to talk to! What else would you like to share?"
+            ]
+        };
+
+        function sendAiMessage() {
+            const input = document.getElementById('ai-input');
+            const message = input.value.trim().toLowerCase();
+            
+            if (message) {
+                // Add user message
+                addAiMessage(input.value, 'user');
+                input.value = '';
+                
+                // Process AI response
+                setTimeout(() => {
+                    let response = getAiResponse(message);
+                    addAiMessage(response, 'bot');
+                }, 300); // Minimal delay for natural feel
+            }
+        }
+        
+        function getAiResponse(message) {
+            // Check for greetings
+            if (message.includes('hi') || message.includes('hello') || message.includes('hey')) {
+                return randomResponse(aiResponses.greetings);
+            }
+            
+            // Check feelings
+            if (message.includes('happy') || message.includes('good') || message.includes('great')) {
+                return randomResponse(aiResponses.feelings.happy);
+            }
+            if (message.includes('sad') || message.includes('down') || message.includes('upset')) {
+                return randomResponse(aiResponses.feelings.sad);
+            }
+            if (message.includes('excited') || message.includes('thrilled') || message.includes('pumped')) {
+                return randomResponse(aiResponses.feelings.excited);
+            }
+            
+            // Check activities
+            if (message.includes('party') || message.includes('celebrate') || message.includes('dance')) {
+                return randomResponse(aiResponses.activities.party);
+            }
+            if (message.includes('relax') || message.includes('chill') || message.includes('quiet')) {
+                return randomResponse(aiResponses.activities.relax);
+            }
+            if (message.includes('travel') || message.includes('trip') || message.includes('vacation')) {
+                return randomResponse(aiResponses.activities.travel);
+            }
+            
+            // Check for specific questions
+            if (message.includes('how are you')) {
+                return "I'm wonderful because I get to celebrate your birthday with you! How about you?";
+            }
+            if (message.includes('thank')) {
+                return "You're so welcome! But really, I should be thanking you for being so amazing!";
+            }
+            
+            // 20% chance of compliment
+            if (Math.random() < 0.2) {
+                return randomResponse(aiResponses.compliments);
+            }
+            
+            // 30% chance of follow-up question
+            if (Math.random() < 0.3) {
+                return randomResponse(aiResponses.questions);
+            }
+            
+            // Default response
+            return randomResponse(aiResponses.default);
+        }
+        
+        function randomResponse(responses) {
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+        
+        function addAiMessage(text, sender) {
+            const messages = document.getElementById('ai-messages');
+            const message = document.createElement('div');
+            message.className = `ai-message ${sender}`;
+            message.textContent = text;
+            messages.appendChild(message);
+            messages.scrollTop = messages.scrollHeight;
+        }
+        
+        // Animation functionality
+        function changeAnimation() {
+            const animations = ['bounce', 'spin', 'pulse', 'shake', 'flip', 'jello'];
+            const randomAnim = animations[Math.floor(Math.random() * animations.length)];
+            startAnimation(randomAnim);
+        }
+        
+        function startAnimation(animation) {
+            const box = document.getElementById('animation-box');
+            box.style.animation = 'none';
+            void box.offsetWidth; // Trigger reflow
+            box.style.animation = `${animation} 1s`;
+            
+            // Change color on each animation
+            const colors = ['#ff85a2', '#ff4785', '#ffb6c1', '#ff69b4', '#ff1493'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            box.style.background = `linear-gradient(45deg, ${randomColor}, ${colors[Math.floor(Math.random() * colors.length)]})`;
+        }
+        
+        // Create bubbles
+        function createBubbles() {
+            const container = document.getElementById('animations-section');
+            const bubbleCount = 20;
+            
+            for (let i = 0; i < bubbleCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.style.left = Math.random() * 100 + 'vw';
+                bubble.style.bottom = '0';
+                bubble.style.width = Math.random() * 50 + 20 + 'px';
+                bubble.style.height = bubble.style.width;
+                bubble.style.animationDuration = Math.random() * 10 + 5 + 's';
+                bubble.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(bubble);
+                
+                // Remove bubble after animation
+                setTimeout(() => {
+                    bubble.remove();
+                }, 15000);
+            }
+        }
+        
+        // Secret note functionality
+        function toggleNote() {
+            const note = document.getElementById('secret-note');
+            if (note.style.display === 'block') {
+                note.style.animation = 'foldIn 0.5s ease-out reverse';
+                setTimeout(() => {
+                    note.style.display = 'none';
+                }, 500);
+            } else {
+                note.style.display = 'block';
+                note.style.animation = 'foldIn 0.5s ease-out';
+            }
+        }
+        
+        // Special message
+        function showSpecialMessage() {
+            document.getElementById('special-message').style.display = 'block';
+            showConfetti();
+        }
+        
+        // Confetti effect
+        function showConfetti() {
+            const colors = ['#ff85a2', '#ff4785', '#ffb6c1', '#ff69b4', '#ff1493'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                
+                document.body.appendChild(confetti);
+                
+                // Remove confetti after animation
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+        
+        // Initialize with some sample todos
+        window.onload = function() {
+            createHearts();
+            
+            todos = [
+                { text: "Wake up with a smile", completed: false },
+                { text: "Enjoy a special breakfast", completed: false },
+                { text: "Do something you love", completed: false },
+                { text: "Celebrate with friends", completed: false },
+                { text: "Make a birthday wish", completed: false }
+            ];
+            renderTodos();
+            
+            // Add bubbles to animation section background
+            setInterval(createBubbles, 3000);
+        };
+    </script>
+</body>
+</html>
